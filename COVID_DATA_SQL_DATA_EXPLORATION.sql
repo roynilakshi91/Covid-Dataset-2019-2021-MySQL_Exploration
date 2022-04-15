@@ -8,18 +8,9 @@ order by 3,4
 
 
 
-
-
-
-
-
 2. # Viewing fields from `covid-2021-deaths` dataset
 
 Select location, date, total_cases, new_cases, total_deaths, population from NILAKSHIDB.`covid-2021-deaths` order by 1,2
-
-
-
-
 
 
 
@@ -32,10 +23,6 @@ Select location, date, total_cases,total_deaths, (total_deaths)/(total_cases)*10
 
 
 
-
-
-
-
 4. # total cases VS population
    # below shows what percentage of population got Covid in United States
    
@@ -44,16 +31,9 @@ Select location, date, population ,total_cases, (total_deaths)/(population)*100 
 
 
 
-
-
 5.# Country with highest infection rate compared to population
 
 Select location,population ,MAX(total_cases) AS highest_infection_count, MAX((total_deaths/population))*100 AS covid_infected_percentage from NILAKSHIDB.`covid-2021-deaths` group by location, population order by covid_infected_percentage DESC
-
-
-
-
-
 
 
 
@@ -68,6 +48,7 @@ order by highest_death_count DESC
 
 
 
+
 7. #Lets see which continent has higest deaths OR "continent is not NULL"
    #This shows the continent is null so it represents as "world"
    
@@ -79,20 +60,9 @@ Select continent, MAX(Cast(total_deaths AS UNSIGNED)) AS highest_death_count FRO
 
 
 
-
-
-
-
-
-
 8. #Lets see which location has higest deaths where continent is NULL
 
 Select location, MAX(Cast(total_deaths AS UNSIGNED)) AS highest_death_count FROM NILAKSHIDB.`covid-2021-deaths`  where continent = "" group by location order by highest_death_count DESC
-
-
-
-
-
 
 
 
@@ -107,8 +77,6 @@ order by 1,2
 
 
 
-
-
 10. # Viewing table Covid Vaccination
 
 SELECT * FROM NILAKSHIDB.`covid-2021-vaccination`
@@ -116,10 +84,6 @@ order by 3,4
 
 
 
-
- 
- 
- 
 
 11. #JOIN both the tables together
 
@@ -129,12 +93,10 @@ ON
 dea.location = vac.location
 AND
 dea.date = vac.date
-  
-  
-  
-  
-  
-
+ 
+ 
+ 
+ 
 12. #Total population Vs Total Vaccination (new_vaccinations per day)
 
 SELECT dea.continent, dea.location, dea.population, vac.new_vaccinations FROM NILAKSHIDB.`covid-2021-deaths` AS dea
@@ -145,10 +107,6 @@ AND
 dea.date = vac.date
 WHERE dea.continent is NOT NULL
 order by 2,3
-
-
-
-
 
 
 
@@ -174,9 +132,6 @@ Select * , (RollingPeopleVaccinate/population)*100 FROM CTE
 
 
 
-
-
-
 14. # Creating new table PercentPopulationVaccinations
 
 USE NILAKSHIDB;
@@ -193,11 +148,9 @@ New_vaccinations varchar(255)
 #RollingPeopleVaccinate varchar(255)
 );
 
- 
- 
- 
- 
- 
+
+
+
 15. #Inserting values from both the tables `covid-2021-deaths` and `covid-2021-vaccination`
 
 Insert into PercentPopulationVaccinations
@@ -219,9 +172,6 @@ SUM(CAST(new_vaccinations AS SIGNED)) OVER (PARTITION BY location ORDER BY locat
 
 
 
-
-
-
 16. #Creating a View to store data for later Visualization
 
 
@@ -235,7 +185,4 @@ dea.location = vac.location
 AND
 dea.date = vac.date
 Select * from PercentPopulationVaccine
-
-
-
 
