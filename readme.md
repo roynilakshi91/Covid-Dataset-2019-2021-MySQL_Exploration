@@ -2,6 +2,10 @@
 
 [Link Dataset here](https://ourworldindata.org/covid-deaths)
 
+From the main data, two dataset has been created with following information
+* Covid deaths
+* Covid Vaccination
+
 All queries for this project are excecuted in MySQL Workbench.
 
 
