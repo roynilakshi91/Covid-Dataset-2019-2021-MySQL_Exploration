@@ -1,4 +1,4 @@
-# Exploring and Analyzing Covid (2019-1021) Dataset
+# Exploring and Analyzing Covid (2019-2021) Dataset
 
 [Link Dataset here](https://ourworldindata.org/covid-deaths)
 
